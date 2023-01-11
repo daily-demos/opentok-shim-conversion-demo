@@ -1,7 +1,8 @@
-const OpenTok = require('daily-opentok-node');
-// const OpenTok = require("opentok");
+const useDaily = process.env.USE_DAILY;
+const OpenTok =
+  useDaily === 'TRUE' ? require('daily-opentok-node') : require('opentok');
 
-exports.handler = async function (event) {
+exports.handler = async function handler(event) {
   const gotSessionID = event.queryStringParameters.sessionID;
 
   // In the case of our default Vonage flow, the OpenTok instance
@@ -13,7 +14,6 @@ exports.handler = async function (event) {
   // will be created by passing in empty string and
   // Daily API key. The second parameter CAN also be
   // a pre-fetched Daily Domain ID if desired.
-  const useDaily = process.env.USE_DAILY;
   if (useDaily === 'TRUE') {
     initParam1 = process.env.DAILY_API_KEY;
     initParam2 = '';
