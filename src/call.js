@@ -2,7 +2,7 @@
 // https://stackoverflow.com/questions/60064861/opentok-toxbox-keep-the-api-key-secret
 // When using Daily's OpenTok shim,
 // the API key is not used and can be set to anything.
-const apiKey = '47542751';
+const apiKey = '47542851'; // Replace this with process.env maybe?
 
 main();
 
@@ -116,6 +116,11 @@ async function initializeSession(sessionID) {
     }
   });
 
+  const link = document.createElement('a');
+  link.href = `/?sessionID=${sessionID}`;
+  link.target = '_blank';
+  link.text = `Click to join session ${sessionID} from another window`;
+
   const info = document.getElementById('sessionInfo');
-  info.innerText = sessionID;
+  info.appendChild(link);
 }

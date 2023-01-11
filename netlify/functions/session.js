@@ -1,7 +1,8 @@
-const OpenTok = require('daily-opentok-node');
-// const OpenTok = require("opentok");
+const useDaily = process.env.USE_DAILY;
+const OpenTok =
+  useDaily === 'TRUE' ? require('daily-opentok-node') : require('opentok');
 
-exports.handler = async function () {
+exports.handler = async function handler() {
   // In the case of our default Vonage flow, the OpenTok instance
   // will be created by passing in Vonage API key and secret
   let initParam1 = process.env.VONAGE_API_KEY;
@@ -10,17 +11,17 @@ exports.handler = async function () {
   // In case of Daily provider flow, the OpenTok instance
   // will be created by passing in a Daily API Key
   // and empty string.
-  const useDaily = process.env.USE_DAILY;
   if (useDaily === 'TRUE') {
     initParam1 = process.env.DAILY_API_KEY;
     initParam2 = '';
   }
+
   const ot = new OpenTok(initParam1, initParam2);
   let session;
 
   try {
     session = await new Promise((resolve, reject) => {
-      ot.createSession({ mediaMode: 'relayed' }, (error, sess) => {
+      ot.createSession({ mediaMode: 'routed' }, (error, sess) => {
         if (error) {
           reject(error);
         }
