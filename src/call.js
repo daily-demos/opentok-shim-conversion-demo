@@ -2,7 +2,7 @@
 // https://stackoverflow.com/questions/60064861/opentok-toxbox-keep-the-api-key-secret
 // When using Daily's OpenTok shim,
 // the API key is not used and can be set to anything.
-const apiKey = 'Your Opentok API Key';
+const apiKey = '47542851';
 
 main();
 

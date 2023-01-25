@@ -21,7 +21,7 @@ exports.handler = async function handler() {
 
   try {
     session = await new Promise((resolve, reject) => {
-      ot.createSession({ mediaMode: 'routed' }, (error, sess) => {
+      ot.createSession({ mediaMode: 'relayed' }, (error, sess) => {
         if (error) {
           reject(error);
         }
